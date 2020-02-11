@@ -1,0 +1,6 @@
+autopep8==1.4.4
+beautifulsoup4==4.8.1
+bs4==0.0.1
+selenium==3.141.0
+virtualenv==16.7.6
+
