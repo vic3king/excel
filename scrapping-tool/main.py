@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 from selenium_driver import driver
 from scroll import scroll
 
+
 def get_quotes(url):
     try:
         # implicitly_wait tells the driver to wait before throwing an exception
@@ -32,5 +33,6 @@ def get_quotes(url):
                 json.dump(quotes, json_file)
     except Exception as e:
         print(e, '>>>>>>>>>>>>>>>Exception>>>>>>>>>>>>>>')
+
 
 get_quotes('https://www.brainyquote.com/topics/excellence-quotes')
