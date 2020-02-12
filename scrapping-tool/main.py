@@ -19,15 +19,14 @@ def get_quotes(url):
         driver.close()
 
         # Empty array to store the links
-        quotes = []
+        quotes = {}
 
         regex = re.compile('^b-qt')
         quotes_list = soup.find_all('a', attrs={'class': regex})
         # Looping through all the a elements in the page source
-        for quote in quotes_list:
-            quotes.append({
-                "text": quote.get_text()
-            })
+        for index, quote in enumerate(quotes_list):
+            id = f"text-{index}"
+            quotes[id] = quote.text
 
             with open("quotes.json", 'w') as json_file:
                 json.dump(quotes, json_file)
