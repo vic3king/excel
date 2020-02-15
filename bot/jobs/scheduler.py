@@ -1,12 +1,12 @@
-from apscheduler.schedulers.background import BlockingScheduler
+from apscheduler.schedulers.background import BackgroundScheduler
 
 # jobs
 from bot.post_message import post_quote_to_channel
 
-scheduler = BlockingScheduler()
+scheduler = BackgroundScheduler()
 
 scheduler.add_job(
     post_quote_to_channel,
-    'cron',
-    hour=18
+    'interval',
+    seconds=10
 )

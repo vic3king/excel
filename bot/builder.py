@@ -1,7 +1,7 @@
 def construct_payload(HEADER_BLOCK, DIVIDER_BLOCK, MESSAGE_BLOCK):
 
     return {
-        "channel": "testing",
+        "channel": "CTJ197CGK",
         "username": "test",
         "icon_emoji": ":robot_face:",
         "text": ":wave: Your daily dose of motivation has arrived",

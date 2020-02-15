@@ -1,24 +1,19 @@
 import os
-import logging
+import time
 from flask import Flask
-from slack import WebClient
-from slackeventsapi import SlackEventAdapter
-import ssl as ssl_lib
-import certifi
-from bot.jobs import scheduler
-from bot.post_message import post_quote_to_channel
+from bot.jobs.scheduler import scheduler
+
 # Initialize a Flask app to host the events adapter
 app = Flask(__name__)
 
-# Initialize a Web API client
-post_quote_to_channel()
-# @manager.command
-# def start_scheduler():
-#     scheduler.start()
-
 if __name__ == "__main__":
-    logger = logging.getLogger()
-    logger.setLevel(logging.DEBUG)
-    logger.addHandler(logging.StreamHandler())
-    ssl_context = ssl_lib.create_default_context(cafile=certifi.where())
-    app.run(port=3000)
+    scheduler.start()
+    print('Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
+
+    try:
+        # This is here to simulate application activity (which keeps the main thread alive).
+        while True:
+            time.sleep(5)
+    except (KeyboardInterrupt, SystemExit):
+        # Not strictly necessary if daemonic mode is enabled but should be done if possible
+        scheduler.shutdown()

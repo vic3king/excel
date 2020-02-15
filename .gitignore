@@ -1,3 +1,13 @@
-venv
-__pycache__
-.vscode
+# editors
+.vscode/
+
+# virtualenv
+.venv
+venv/
+ENV/
+
+__pycache__/
+*.pyc
+*.egg-info/
+*.egg
+.env
