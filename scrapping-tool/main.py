@@ -14,22 +14,33 @@ def get_quotes(url):
         # This starts the scrolling by passing the driver and a timeout
         scroll(driver, 5)
         # Once scroll returns bs4 parsers the page_source
-        soup = BeautifulSoup(driver.page_source, 'html.parser')
+        soup = BeautifulSoup(driver.page_source, "lxml")
         # Them we close the driver as soup_a is storing the page source
         driver.close()
 
         # Empty array to store the links
-        quotes = {}
+        quotes = []
 
-        regex = re.compile('^b-qt')
-        quotes_list = soup.find_all('a', attrs={'class': regex})
-        # Looping through all the a elements in the page source
-        for index, quote in enumerate(quotes_list):
-            id = f"text-{index}"
-            quotes[id] = quote.text
+        regex_quotes = re.compile('^b-qt')
+        regex_authors = re.compile('^bq-aut')
 
-            with open("quotes.json", 'w') as json_file:
-                json.dump(quotes, json_file)
+        quotes_list = soup.find_all('a', attrs={'class': regex_quotes})
+        authors_list = soup.find_all('a', attrs={'class': regex_authors})
+
+        quotes = []
+        zipped_quotes = list(zip(quotes_list, authors_list))
+        for i, x in enumerate(zipped_quotes):
+            quote = x[0]
+            author = x[1]
+            quotes.append({
+                "id":  f"id-{i}",
+                "quote": quote.get_text(),
+                "author": author.get_text(),
+                "author-link": author.get('href')
+            })
+
+        with open("quotes.json", 'w') as json_file:
+            json.dump(quotes, json_file)
     except Exception as e:
         print(e, '>>>>>>>>>>>>>>>Exception>>>>>>>>>>>>>>')
 

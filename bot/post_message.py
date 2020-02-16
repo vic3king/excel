@@ -2,6 +2,7 @@ import os
 from slack import WebClient
 from dotenv import load_dotenv
 from bot.builder import construct_payload
+from utils.random_quote  import random_quotes_generator
 
 load_dotenv()
 
@@ -12,6 +13,11 @@ slack_web_client = WebClient(token=SLACK_BOT_TOKEN)
 
 
 def post_quote_to_channel():
+    quote = random_quotes_generator()
+    author = quote['author']
+    link = f"https://www.brainyquote.com{quote['author-link']}"
+
+
     # Get the onboarding message payload
     message = construct_payload({
         "type": "section",
@@ -27,7 +33,7 @@ def post_quote_to_channel():
         "type": "section",
         "text": {
             "type": "mrkdwn",
-            "text": "The test of the artist does not lie in the will with which he goes to work, but in the excellence of the work he produces... *By <fakeLink.toUser.com|Mark>*"
+            "text": f"The test of the artist does not lie in the will with which he goes to work, but in the excellence of the work he produces... *By <{link}|{author}>*"
         }
     })
     # Post the onboarding message in Slack
