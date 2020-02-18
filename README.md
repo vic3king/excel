@@ -58,3 +58,6 @@ pip3 install -r requirements.txt
 ## Author
 
 - **Akaniru victory** - _Initial work_ - [Vic3king](http://vic3king.io)
+
+# Plug
+Share some love by leaving a ⭐️
