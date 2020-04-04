@@ -53,7 +53,8 @@ pip3 install -r requirements.txt
 
 ## Articles
 
-- Coming soon
+- [Part 1](https://dev.to/vic3king/the-one-where-we-build-a-web-scrapper-and-a-slackbot-part-1-3blk)
+- [Part 2](https://dev.to/vic3king/the-one-where-we-build-a-web-scrapper-and-a-slackbot-part-2-252d)
   
 ## Author
 
